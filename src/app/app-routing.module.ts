@@ -1,9 +1,12 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MatchngPageComponent } from './matchng-page/matchng-page.component';
 import { UsersListComponent } from './users-list/users-list.component';
 
 const routes: Routes = [
   {path: "UsersList" , component: UsersListComponent},
+  {path: "addUsers" , component:MatchngPageComponent },
+  { path: '',   redirectTo: '/addUsers', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -11,4 +14,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const RoutingComponent =[UsersListComponent]
+export const RoutingComponent =[UsersListComponent,MatchngPageComponent]
