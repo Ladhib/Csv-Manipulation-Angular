@@ -1,0 +1,50 @@
+
+  <h5 style="text-align: center;margin: auto;">Manual Mapping:</h5>
+  <br><h6 style="text-align: center;color: red;">Please reorder the headers of the CSV file according to the system headers and the percentage:</h6>
+
+<div cdkDropListGroup class="list-group list-group-horizontal" style="display: flex;">
+
+
+  <div class="example-container" style="margin: auto;">
+    <h5 style="text-align: left;">System :</h5>
+    <div cdkDropList [cdkDropListData]="done" class="example-list" style="height: auto;border-right: none">
+      <div style="height: 70px;text-align: center;" class="example-box" *ngFor="let item of done">
+        <p style="text-align: center;">{{item}}</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="example-container" style="margin: auto;">
+    <h5 style="text-align: left;">CSV Headers : editable</h5>
+
+    <div cdkDropList style="border-left: none;justify-content: flex-start;" [cdkDropListData]="headersSimilarityTab" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div style="height: 70px" class="example-box" *ngFor="let item of headersSimilarityTab"cdkDragLockAxis="y"
+cdkDrag>
+          <p style="padding-right:70 ;">{{item.key}}</p>
+        
+
+        <div *ngFor="let percentage of fixedSimilarityTab">
+          <p style="text-decoration:gray ; font-size: 10px ; font-family: Georgia, 'Times New Roman', Times, serif;">
+            {{item.similarity.rating* 100}}% : {{item.similarity.target}}</p>
+
+          <mat-progress-bar style="width: 120px;" mode="determinate" [value]='item.similarity.rating *100'
+            aria-label="Rating"></mat-progress-bar><br>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+
+
+<div class="modal-footer"style="padding-right: 0%;">
+  <button  class="btn btn-success" (click)="ComfirmMatching()" (click)="onNoClick()" >Match</button>
+</div>
+
+

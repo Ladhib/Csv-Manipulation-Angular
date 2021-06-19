@@ -1,0 +1,92 @@
+<div >
+  <img style="max-width: 20%;" src="https://www.salons-solutions.com/logo/428ffd548b5dbe4logo-expensya.jpg">
+</div>
+<div style="text-align: center;">
+  <h2>Please, Enter Your CSV File.</h2>
+</div>
+<br><br>
+
+
+<div style="text-align: center;" class="alert alert-success" role="alert" *ngIf="successAlert == true">
+Your CSV File Is Successfuly Matched
+</div>
+
+<div style="text-align: center;" class="alert alert-warning" role="alert" *ngIf="FailAlert == true">
+  Your CSV File Cannot Be Matched Automatically, Please Try Manuall Matching.
+  </div>
+
+        <div class="input-group mb-6" style="width: 70%; text-align: center;
+        margin: auto;margin-top: 5%;">
+            <input style="width: 50%;"  type="file" class="form-control"  #fileImportInput #csvReader name="File Upload" id="csvFileUpload"(change)="fileChangeListener($event)" (change)="uploadListener($event)" accept=".csv"   >
+            <label class="input-group-text" for="inputGroupFile02" style="width: 20%;justify-content: center;">Upload</label>
+          </div> <br><br>
+          <div *ngIf="autoMatching == true"  style="text-align: center;">
+
+    <button type="button" class="btn btn-success" (click)="translateHeaders()" style="width: 20rem;" data-bs-toggle="modal" data-bs-target="#exampleModal">Match</button>
+</div><br>
+<div style="text-align: center;">
+  <button type="button" class="btn btn-info" (click)='redirectUsers()'>Users list</button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Verification</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+
+        <div cdkDropListGroup class="list-group list-group-horizontal">
+
+          <div class="example-container"  style="margin: auto;">
+            <h5 style="text-align: center;">System :</h5>
+            <div cdkDropList [cdkDropListData]="fileKeys" class="example-list">
+              <div  class="example-box" *ngFor="let item of systemKeys" >
+                <ul class="list-group">
+                 <li class="list-group-item">{{item}}</li> 
+                </ul>
+               </div>
+            </div>
+          </div>
+        
+        
+          <div class="example-container"style="margin: auto;">
+            <h5 style="text-align: center;">CSV Headers</h5>
+            <div cdkDropList [cdkDropListData]="headerArray" class="example-list" >
+              <div  class="example-box" *ngFor="let item of headerArray">
+                <ul class="list-group">
+                  <li class="list-group-item">{{item}}</li>
+              </ul>
+              </div>
+            </div>
+          </div>
+        
+         
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="openDialog()" >Manual Mapping</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal"  (click)="autoMatch()">Comfirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div *ngIf="ManuelleMatching==true" style="text-align: center;">
+    <button type="button" class="btn btn-success" style="width: 20rem;" (click)="openDialog()">Manual Mapping</button>
+</div>
+
+<ngx-spinner>
+Please Wait...
+</ngx-spinner>
+
